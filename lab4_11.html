@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style> 
+
+
+div.animate-area	{ 
+	width: auto; 
+	height:374px;
+	position:relative;
+	top:120px;
+	
+	background-color:red;
+	background-image: url(back1.png);
+	background-position: 0px 0px;
+	background-repeat: repeat-x;
+
+	animation: animatedBackground 15s linear infinite;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 100% 0; }
+}
+
+/* Standard syntax */
+@keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 100% 0; }
+}
+
+div.image {
+   content:url("plane.png");
+   width: 100px;
+    height: 72px;
+	position:absolute; top:0; left:0; right:0; bottom:0; 
+	margin: 420px 500px;
+	z-index:10;
+}
+
+
+h2   {color:#003D99;  font-size: 3em; font-family: "Courier New", Monospace; position: absolute;top: 5px; left:400px;}
+img.plane{
+	position:absolute; top:0; left:0; right:0; bottom:0; 
+	margin: 180px 500px;
+	z-index:5;
+
+}
+button{ position:absolute;top:550px;left:1100px; width:100 px; height: 50px;font-size: 2em; color:#003D99;
+}
+input[type=button]{
+position:absolute;top:550px;left:500px;width:100 px; height: 50px;font-size: 1.5em; color:#CC0000;
+
+}
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+         <!--
+            var plane_obj = null;
+			var flag=1;
+			var miss_obj=null;
+			var miss_obj2=null;
+			var xdis ;
+            var x2dis = Math.floor((Math.random()*110) + 130);
+			
+			
+            function init(){
+               plane_obj = document.getElementById('plane');
+               plane_obj.style.position= 'relative'; 
+               plane_obj.style.top = '0px';  
+			   miss_obj=document.getElementById('miss');
+			   miss_obj2=document.getElementById('miss2');
+			   miss_obj.style.left='0 px';
+			    miss_obj2.style.left='0 px';
+			   
+            }
+            
+            function moveDown(){
+			if(flag!=0){
+               plane_obj.style.top = parseInt(plane_obj.style.top) + 120 + 'px';
+			   flag--;
+			   }
+            }
+			
+			function moveUp(){
+				if(flag!=2){
+					plane_obj.style.top = parseInt(plane_obj.style.top) - 120 + 'px';
+					flag++;
+			   }
+            }
+			
+			
+            
+            window.onload =init;
+			
+			$(document).ready(function(){
+				$("#Start").click(function repeatMiss(){
+				
+				
+				xdis = Math.floor((Math.random()*110) + 10);
+				miss_obj.style.margin= xdis + 'px 0px';
+				$("#miss").animate({margin: "100px 1600px"},5000, "linear",repeatMiss)
+				
+				x2dis = Math.floor((Math.random()*160) + 120);
+				miss_obj2.style.margin= x2dis + 'px 0px';
+				$("#miss2").animate({margin: x2dis + " 1600px"},4000, "linear",repeatMiss)
+				});
+				
+				
+				});
+				function getPosition(miss_obj) {
+	var xPosition = 0;
+    var yPosition = 0;
+  
+    while(miss_obj) {
+        xPosition += (miss_obj.offsetLeft - miss_obj.scrollLeft + miss_obj.clientLeft);
+        yPosition += (miss_obj.offsetTop - miss_obj.scrollTop + miss_obj.clientTop);
+        miss_obj = miss_obj.offsetParent;
+    }
+    return { x: xPosition, y: yPosition };
+}
+			
+         //-->
+      </script>
+</head>
+<body style="background-color:#FFFFBA">
+<div><h2>Save the Poor Plane </h2> </div>
+	
+	<button id="Start">START </button>
+	<div class="animate-area" >
+		
+	
+			
+		   <img class="missile1" id="miss" src="missile.png" height="72px" width="100px" style="position:absolute; top:0; left:0; right:0; bottom:0; 
+	margin: 100px -120px; z-index:10;" />
+				
+          <img class="missile1" id="miss2" src="missile.png" height="72px" width="100px" style="position:absolute; top:0; left:0; right:0; bottom:0; 
+	margin: 300px -120px; z-index:10;" />
+		 
+		
+	 
+        <img class="plane" id="plane" src="plane.png" height="72px" width="100px"  />
+
+         
+
+	  </div>
+	  <form>
+         <input style="left:650px" type="button" value="Move Down" onclick="moveDown();" />
+		
+         <input style="align: middle" type="button" value="Move Up" onclick="moveUp();" />
+		
+	  </form>
+	<!-- <div class="image" id="plane">
+	  </div> -->
+	  
+	
+</body>
+</html>
